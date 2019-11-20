@@ -1,31 +1,29 @@
 package id.ac.its.nada.movingsprites;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 
-public class SpaceShip {
+public class SpaceShip extends Sprite {
 
 	private int dx;
 	private int dy;
-	private int x = 40;
-	private int y = 60;
-	private int w;
-	private int h;
-	private Image image;
+	private List<Missile> missiles;
 	
-	public SpaceShip() {
+	public SpaceShip(int x, int y) {
 		
-		loadImage();
+		super(x, y);
+		initSpaceShip();
 	}
 	
-	private void loadImage() {
+	private void initSpaceShip() {
 		
-		ImageIcon ii = new ImageIcon(getClass().getResource("spaceship.png"));
-		image = ii.getImage();
+		missiles = new ArrayList<>();
 		
-		w = image.getWidth(null);
-		h = image.getHeight(null);
+		loadImage("spaceship.png");
+		getImageDimensions();
 	}
 	
 	public void move() {
@@ -34,50 +32,39 @@ public class SpaceShip {
 		y += dy;
 	}
 
-	public int getX() {
+	public List<Missile> getMissiles() {
 		
-		return x;
+		return missiles;
 	}
 
-	public int getY() {
-		
-		return y;
-	}
-
-	public int getWidth() {
-		
-		return w;
-	}
-
-	public int getHeight() {
-		
-		return h;
-	}
-
-	public Image getImage() {
-		
-		return image;
-	}
-	
 	public void keyPressed(KeyEvent e) {
 		
 		int key = e.getKeyCode();
 		
+		if (key == KeyEvent.VK_SPACE) {
+			fire();
+		}
+		
 		if (key == KeyEvent.VK_LEFT) {
-			dx = -2;
+			dx = -1;
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
-			dx = 2;
+			dx = 1;
 		}
 		
 		if (key == KeyEvent.VK_UP) {
-			dy = -2;
+			dy = -1;
 		}
 		
 		if (key == KeyEvent.VK_DOWN) {
-			dy = 2;
+			dy = 1;
 		}
+	}
+	
+	public void fire() {
+		
+		missiles.add(new Missile(x + width, y + height / 2));
 	}
 	
 	public void keyReleased(KeyEvent e) {

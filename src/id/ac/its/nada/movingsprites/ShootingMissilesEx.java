@@ -3,9 +3,9 @@ package id.ac.its.nada.movingsprites;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class MovingSpriteEx extends JFrame {
-	
-	public MovingSpriteEx() {
+public class ShootingMissilesEx extends JFrame {
+
+	public ShootingMissilesEx() {
 		
 		initUI();
 	}
@@ -14,23 +14,21 @@ public class MovingSpriteEx extends JFrame {
 		
 		add(new Board());
 		
-		setTitle("Moving Sprite");
 		setSize(400, 300);
-		
-		setLocationRelativeTo(null);
 		setResizable(false);
+		
+		setTitle("Shooting Missiles");
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(() -> {
-			MovingSpriteEx ex = new MovingSpriteEx();
+			ShootingMissilesEx ex = new ShootingMissilesEx();
 			ex.setVisible(true);
 		});
 
 	}
 
-
-	
 }
